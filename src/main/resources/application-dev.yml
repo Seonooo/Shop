@@ -1,0 +1,34 @@
+server:
+  port: 8090
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher  # swagger2 문서 오류 때문에
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/shop?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: {id}
+    password: {password}
+
+
+  jpa: # JPA - DB 테이블 연동x
+    show-sql: true # JPA SQL문 확인 가능(기본 true)
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        format_sql: true # SQL문 가독성을 높여주는 설정(기본 true)
+        hibernate.format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+
+logging:
+  level:
+    org.hibernate.SQL: info
+
