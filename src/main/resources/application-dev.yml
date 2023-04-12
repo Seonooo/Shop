@@ -8,10 +8,15 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/shop?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
-    username: {id}
-    password: {password}
+    url: jdbc:mysql://localhost:3306/shop?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&CharacterEncoding=UTF-8
+    username: root
+    password: 1234
 
+  security:
+    jwt:
+      header: Authorization
+      secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+      token-validity-in-seconds: 86400
 
   jpa: # JPA - DB 테이블 연동x
     show-sql: true # JPA SQL문 확인 가능(기본 true)
@@ -27,6 +32,12 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
+
+  batch:
+    job:
+      enabled: false # 시작과 동시에 실행하는 것은 방지
+    jdbc:
+      initialize-schema: always # batch 스키마 자동 생성
 
 logging:
   level:
